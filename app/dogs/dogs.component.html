@@ -1,11 +1,11 @@
 <StackLayout>
   <ListView [items]="dogs" class="list-group" height="100%">
-    <template let-item="item" >
-      <Label 
+    <ng-template let-item="item" >
+      <Label
         (tap)="navigateToDetails(item.id)"
         [text]="item.name"
         class="list-group-item">
       </Label>
-    </template>
+    </ng-template>
   </ListView>
 </StackLayout>
