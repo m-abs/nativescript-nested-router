@@ -3,6 +3,7 @@
 
 
 <!--Grid Layout Example-->
+<!--
 <GridLayout rows="*, 2*, 30" class="page">
   <StackLayout row="0">
     <my-cat-tab></my-cat-tab>
@@ -16,6 +17,20 @@
     class="btn btn-outline btn-rounded-sm">
   </Button>
 </GridLayout>
+-->
+
+<GridLayout rows="*, 50" columns="*" class="page">
+  <StackLayout row="0" [visibility]="selectedIndex == 0 ? 'visible' : 'collapse'">
+    <my-cat-tab></my-cat-tab>
+  </StackLayout>
+  <StackLayout row="0" [visibility]="selectedIndex == 1 ? 'visible' : 'collapse'">
+    <my-dog-tab></my-dog-tab>
+  </StackLayout>
+  <GridLayout row="1" rows="*" columns="*, *">
+    <Button col="0" text="Dogs" (tap)="selectedIndex = 0"></Button>
+    <Button col="1" text="Cats" (tap)="selectedIndex = 1"></Button>
+  </GridLayout>
+</GridLayout>
 
 <!--Tab View Layout Example-->
 <!--<TabView class="tab-view" tabsBackgroundColor="#f57c00" selectedTabTextColor="black">
@@ -28,8 +43,9 @@
 </TabView>-->
 
 <!--TabView Layoyt example + navigate to root when switching tabs-->
-<!--<TabView 
-  #tabView 
+<!--
+<TabView
+  #tabView
   tabsBackgroundColor="#f57c00" selectedTabTextColor="black"
   [(ngModel)]="selectedIndex"
   (selectedIndexChanged)="tabViewIndexChange(tabView.selectedIndex)">
@@ -41,4 +57,5 @@
   <StackLayout *tabItem="{title: 'Cats'}">
     <my-cat-tab></my-cat-tab>
   </StackLayout>
-</TabView>-->
+</TabView>
+-->
