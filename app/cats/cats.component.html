@@ -13,7 +13,7 @@
 
   <Button
     text="Show Mystique"
-    [nsRouterLink]="['/home', {outlets: { catoutlet: ['cats', 'Mystique']}}]"
+    [nsRouterLink]="['/home', {outlets: { catoutlet: ['cats', { param: 1 }, 'Mystique']}}]"
     class="btn btn-primary">
   </Button>
 </StackLayout>

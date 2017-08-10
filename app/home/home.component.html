@@ -39,8 +39,8 @@
     <my-dog-tab></my-dog-tab>
   </StackLayout>
   <GridLayout row="1" rows="*" columns="*, *">
-    <Button col="0" text="Dogs" (tap)="selectedIndex = 0"></Button>
-    <Button col="1" text="Cats" (tap)="selectedIndex = 1"></Button>
+    <Button col="0" text="Cats" (tap)="navigateToCatTab()"></Button>
+    <Button col="1" text="Dogs" (tap)="navigateToDogTab()"></Button>
   </GridLayout>
 </GridLayout>
 

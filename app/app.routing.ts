@@ -9,7 +9,7 @@ import { CatsComponent } from './cats/cats.component';
 import { CatDetailsComponent } from './cat-details/cat-details.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home/(catoutlet:cats//dogoutlet:dogs)', pathMatch: 'full' },
+  { path: '', redirectTo: '/home;selectedIndex=0/(catoutlet:cats//dogoutlet:dogs)', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, children: [
     { path: 'cats', component: CatsComponent, outlet: 'catoutlet'},
     { path: 'cats/:name', component: CatDetailsComponent, outlet: 'catoutlet'},
