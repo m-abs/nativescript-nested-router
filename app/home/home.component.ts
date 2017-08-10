@@ -5,22 +5,28 @@ import { NSLocationStrategy } from 'nativescript-angular/router/ns-location-stra
 
 @Component({
     selector: 'my-home',
-    templateUrl: './home/home.component.html'
+    templateUrl: './home/home.component.html',
+    styleUrls: [
+      './home/home.component.css',
+    ]
 })
 export class HomeComponent {
   public selectedIndex: number = 0;
 
-  constructor(private router: RouterExtensions, private locationstrategy: NSLocationStrategy) {
+  constructor(
+    private router: RouterExtensions,
+    private locationstrategy: NSLocationStrategy,
+  ) {
   }
 
-  navigateToDogsRoot() {
+  public navigateToDogsRoot() {
     this.router.navigate([
       '/home',
       { outlets: { dogoutlet: ['dogs'] } }
     ]);
   }
 
-  navigateToCatsRoot() {
+  public navigateToCatsRoot() {
     console.dir(this.locationstrategy._getStates().pop());
     this.router.navigate([
       '/home',
@@ -28,7 +34,7 @@ export class HomeComponent {
     ]);
   }
 
-  tabViewIndexChange(index: number) {
+  public tabViewIndexChange(index: number) {
     switch(index) {
       case 0: 
         this.navigateToDogsRoot();

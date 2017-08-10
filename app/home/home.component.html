@@ -19,11 +19,23 @@
 </GridLayout>
 -->
 
-<GridLayout rows="*, 50" columns="*" class="page">
-  <StackLayout row="0" [visibility]="selectedIndex == 0 ? 'visible' : 'collapse'">
+<GridLayout rows="*, 50" columns="*" class="page tabs">
+  <StackLayout row="0"
+    class="tab1"
+
+    [class.active]="selectedIndex == 0"
+    [class.inactive]="selectedIndex != 0"
+  >
     <my-cat-tab></my-cat-tab>
   </StackLayout>
-  <StackLayout row="0" [visibility]="selectedIndex == 1 ? 'visible' : 'collapse'">
+  <StackLayout
+    row="0"
+
+    class="tab2"
+
+    [class.active]="selectedIndex == 1"
+    [class.inactive]="selectedIndex != 1"
+  >
     <my-dog-tab></my-dog-tab>
   </StackLayout>
   <GridLayout row="1" rows="*" columns="*, *">

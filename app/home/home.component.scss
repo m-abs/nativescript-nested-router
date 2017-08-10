@@ -1,0 +1,83 @@
+@import '~nativescript-animate-sass/src/animate';
+
+@keyframes fadeInLeft {
+  from {
+    transform: translateX(-300);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-300);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    transform: translateX(300);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(300);
+  }
+}
+
+.tab1 {
+  opacity: 0;
+  transform: translateX(-300);
+
+  &.active {
+    @include animate(fadeInLeft, 400ms, ease-in-out);
+
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &.inactive {
+    visibility: collapse;
+    @include animate(fadeOutLeft, 400ms, ease-in-out);
+  }
+}
+
+.tab2 {
+  opacity: 0;
+  transform: translateX(300);
+
+  &.active {
+    @include animate(fadeInRight, 400ms, ease-in-out);
+
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &.inactive {
+    visibility: collapse;
+    @include animate(fadeOutRight, 400ms, ease-in-out);
+  }
+}

@@ -3,3 +3,4 @@ platforms
 hooks
 
 app/**/*.js
+*.css
