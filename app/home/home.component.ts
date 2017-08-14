@@ -11,6 +11,7 @@ import { isAndroid } from 'tns-core-modules/platform';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/combineLatest';
 
 @Component({
@@ -29,6 +30,8 @@ export class HomeComponent {
 
   private outlets = {};
 
+  private curPagePath: string;
+
   constructor(
     private route: ActivatedRoute,
     private router: RouterExtensions,
@@ -38,12 +41,14 @@ export class HomeComponent {
   }
 
   ngOnInit() {
+    this.subs.push(this.route.url.subscribe(([{path}]) => {
+      this.curPagePath = `/${path}`;
+    }));
     this.subs.push(this.route.params.subscribe((params) => {
       if (params['selectedIndex']) {
-        this.selectedIndex = params['selectedIndex'];
+        this.selectedIndex = Number(params['selectedIndex']);
       }
     }));
-
   }
 
   ngAfterContentInit() {
@@ -54,12 +59,22 @@ export class HomeComponent {
         const states = this.locationstrategy._getStates();
         const curState = states.pop();
 
-        if (!curState.isPageNavigation && curState.url.indexOf('/home') === 0) {
+        if (!curState.isPageNavigation && curState.url.indexOf(this.curPagePath) === 0) {
+          for (const state of states.reverse()) {
+            const m = state.url.match(/^\/home;(selectedIndex=([0-9]*))/);
+            if (m && m[2]) {
+              this.ngZone.run(() => this.selectedIndex = Number(m[2]));
+              break;
+            }
+          }
+
           this.router.back();
           data.cancel = true;
         }
       });
     }
+
+    this.currentOutletData();
   }
 
   ngOnDestroy() {
@@ -108,7 +123,7 @@ export class HomeComponent {
 
       output[outlet] = [];
 
-      child.url.subscribe((urlSegment) => {
+      child.url.take(1).subscribe((urlSegment) => {
         for (const url of urlSegment) {
           if (url.path) {
             output[outlet].push(url.path);
@@ -133,7 +148,6 @@ export class HomeComponent {
     }
 
     const outlets = this.currentOutletData();
-    console.dir(outlets);
     if (!outlets) {
       return;
     }
